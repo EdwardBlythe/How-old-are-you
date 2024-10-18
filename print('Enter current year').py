@@ -1,29 +1,23 @@
-print('Enter current year')
-cy = int(input())
+import datetime
+currentDate = datetime.date.today()
 
-print('Enter current month')
-cm = int(input())
-
-print('Enter current day')
-cd = int(input())
-
-##current year * 365 + month * 30 + day = current time? 
-ct = 365*cy + 30*cm + cd 
-
-print('Enter birth year')
-by = int(input())
-
-print('Enter birth month')
-bm = int(input())
-
-print('Enter birth day')
-bd = int(input())
-
-bt = 365*by + 30*bm + bd
-
-at = ct -bt
-
-if( at < 10000 ):
-    print('You will be 10,000 days old in ', at ,'days' )
+birthDate = input('Enter your birthday in YYYY/MM/DD format')
+try:
+    year, month, day = map(int, birthDate.split('/'))
+    date1 = datetime.date(year, month, day)
+except:
+	print("input in the indicated format")
 else:
-    print('You are ', at , 'days old' )
+	year, month, day = map(int, birthDate.split('/'))
+	trueBirthDate = datetime.date(year, month, day)
+
+Difference = currentDate - trueBirthDate
+secondDifference = Difference.total_seconds()
+dayDifference = int(divmod(secondDifference, 86400)[0])
+
+checkValue = 10000
+
+if dayDifference > checkValue:
+    print("you are", str(dayDifference), "days old")
+else:
+	print("you will be 10000 days old in ", str(dayDifference - checkValue) , "days")
